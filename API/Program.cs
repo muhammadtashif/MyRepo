@@ -17,6 +17,7 @@ opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 
 
 });
+builder.Services.AddCors();
 
 
 
@@ -28,7 +29,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors(opt => {
 
+opt.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
+
+});
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
